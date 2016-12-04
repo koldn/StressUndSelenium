@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Stress and Selenium</title>
+
+        <meta name="description" content="Stress and selenium testing">
+        <meta name="author" content="Dmitriy Kolmogortsev">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+        <link rel="stylesheet" href="css/hljs/vs.css" id="highlight-theme">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <style>
+.reveal .slide-number {
+    font-size:22pt;
+    color:black;
+}
+
+.reveal pre {
+    background: none;
+    border: none;
+    box-shadow: none;    
+}
+
+.reveal pre code{
+    color: black;
+    background: none;
+    box-shadow: none;
+    max-height: none;
+}
+
+.reveal section img {
+    border: none;
+    box-shadow: none;
+}
+
+.reveal pre code {
+    overflow: hidden;
+}
+
+.reveal .footer {
+	font-size:22pt;
+	color:black;
+
+	position: absolute; 
+	left: 35%;  
+	bottom: 0.5em;
+}
+        </style>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+            <div class="footer">
+                NAUMEN, Колмогорцев Дмитрий
+            </div>
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h2>Тестирование: нагрузочное и интерфейсное</h2>
+                    <p>
+                        <small>
+                        Колмогорцев Дмитрий / <a href="mailto:dkolmogortsev@naumen.ru">dkolmogortsev@naumen.ru</a>
+                        <br/>
+                        <br/>
+                        </small>
+                    </p>
+                </section>
+
+                <section>
+                	<h2>О чем поговорим:</h2>
+                    <ul>
+                        <li>Нагрузочное</li>
+                        <ul>
+                            <li>Что такое и зачем
+                            <li>Подготовка к проведению
+                            <li>С помощью чего будем проводить
+                        </ul>
+                        <li>Интерфейсное тестирование
+                        <ul>
+                            <li>Место в иерархии тестирования
+                            <li>Selenium
+                        </ul>
+                        <li>Нагрузочное + selenium
+                        <li>Практика
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Нагрузочное тестирование</h2>
+                    <img src="img/load.jpg"/>
+                </section>
+
+                <section>
+                    <h2>Тестирование производительности</h2>
+                    Проверить как быстро может работать система или её компоненты
+                    Что можно проверить:
+                    <ul>
+                        <li>Время отклика
+                        <li>Время отображение
+                        <li>Пропускную способность
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Виды тестирования производительности:</h2>
+                    <ul>
+                        <li>Нагрузочное(load)
+                        <li>Стресс (stress)</li>
+                        <li>Конфигурационное (configuration)</li>
+                        <li>Стабильности (soak)
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Нагрузочное тестирование</h2>
+                    Самый простой вид тестирования производительности<br>
+                    Цель: соответствует ли система требуемым показателям производительности
+                </section>
+
+                <section>
+                    <h2>Процесс проведения</h2>
+                    <ol>
+                        <li>Определяем требуемые показатели
+                        <li>Определяем сценарий нагрузочного тестирования
+                        <li>Проводим тестирование*
+                        <li>Собираем результат
+                        <li>??????
+                        <li>PROFIT, а может и нет
+                    </ol>
+                    <p style="font-size: 20pt;">*Проводить тестирование всегда стоит на одной и той же машине</p>
+                </section>
+
+                <section>
+                    <h2>JMeter</h2>
+                    <p>Умеет тестировать:</p>
+                    <ul>
+                        <li>Web
+                        <li>Jms
+                        <li>Jdbc
+                        <li>soap
+                        <li>и другое
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2>Начало работы</h2>
+                    <img src="img/jmeter_home.png">
+                </section>
+
+                <section>
+                    <h2>Настройка групп потоков</h2>
+                    <img src="img/jmeter_thread.png">
+                </section>
+
+                 <section>
+                    <h2>Получаем сценарий</h2>
+                    <div>Два пути:</div>
+                    <ol>
+                        <li>Написать запросы руками
+                        <li style="color: green;" >Записать сценарий из браузера
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Настройка записи</h2>
+                    <img src="img/jmeter_script.png">
+                </section>
+
+                <section>
+                    <h2>Вывод результатов</h2>
+                    <img src="img/jmeter_log.png">
+                </section>
+
+
+                <section>
+                    <h2>Интерфейсное тестирование: Selenium</h2>
+                </section>
+                <section>
+                    <h2>Место в пирамиде тестирования</h2>
+                    <img src="img/test_pyramid.png"/>
+                </section>
+                <section>
+                    <h2>Selenium</h2>
+                    Инcтрумент для автоматизированного тестирования WEB-приложений<br>
+                    <ul>
+                        <li>Selenium IDE
+                        <li>Selenium WebDriver</li>
+                        <li>Selenium Grid</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Selenium Webdriver</h2>
+                    <ul>
+                        <li>Реализация на многих языках
+                        <li>Из коробки поддерживает управление Firefox
+                        <li>Можно научить управлять даже IE</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Sample code</h2>
+                    <pre style="width:auto;"><code data-trim class="java">
+                        public class SeleniumSample {
+    public static void main(String[] args) throws InterruptedException {
+        // Создаем новый webdriver с указанием на банарник firefox
+        WebDriver wd = new FirefoxDriver(new FirefoxBinary(new File(
+                "E:\\ff\\firefox.exe")), new FirefoxProfile());
+        // Открываем гугл
+        wd.get("http://www.google.com");
+
+        final String searchString = "selenium";
+
+        // Находим поисковую строку и ищем "selenium"
+        WebElement searchBox = wd.findElement(By.name("q"));
+        searchBox.sendKeys(searchString);
+        searchBox.submit();
+
+        // т.к. google асинхронный - ждем поисковой выдачи
+        (new WebDriverWait(wd, 10)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.getTitle().toLowerCase().startsWith(searchString);
+            }
+        });
+        // закрываем webdriver
+        wd.quit();
+    }
+}
+</code></pre>
+                </section>
+                <section>
+                    <h2>Jmeter+Selenium. Success story</h2>
+                    <h3><a href="https://github.com/d0k1/jsflight">Jsflight</a></h3>
+                    <div>Что делает:</div>
+                    <ol>
+                        <li>Записывает куда кликал пользователь
+                        <li>Воспроизводит запись кликов через Selenium</li>
+                        <li>Во время воспроизведения записывает сценарий JMeter
+                        <li>Воспроизводит сценарий с нужной нагрузкой
+                    </ol>
+                </section>
+                <section>
+                    <h2>Практика</h2>
+                    <ul>
+                        <li>Запустить testApp.jar
+                        <li>Сделать и запустить сценарий при котором 3 пользователя будут добавлять сообщения, а 3 будут просматривать сообщения </li>
+                        <li>Написать тест на Selenium, который бы добавил новое сообщение</li>
+                    <ul>
+                </section>
+<!--
+                <section>
+                    <h1>Слайд с кодом</h1>
+<pre style="width:auto;"><code data-trim class="java">package com.transaction.test.dao;
+
+public interface AccountDAO {
+}</code></pre>
+<pre style="width:auto;"><code data-trim class="java">package com.transaction.test.dao;
+public interface TransactionDAO {
+    // Проведение перевода
+    void saveTransaction(long accountId1, long accountId2, long amount);
+}</code></pre>
+                </section>
+-->
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: false,
+                progress: true,
+                history: true,
+                center: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
