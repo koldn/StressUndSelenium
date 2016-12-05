@@ -110,12 +110,13 @@
                         <li>Написана новая версия продукта - 4.0 (прошлая 3.8)
                         <li>Старой пользуется много крупных клиентов(большое кол-во пользователей одновременно)
                         <li>Новый продукт, конечно, прекрасен, но мы не знаем насколько хорошо он работает
+                        <li>Нужно сэмулировать работу пользователей
                     </ul>
                 </section>
                 <section>
                     <h2>Тестирование производительности</h2>
-                    Проверить как быстро может работать система или её компоненты
-                    Что можно проверить:
+                    <div>Проверить как быстро может работать система или её компоненты</div>
+                    <div>Что можно проверить:</div>
                     <ul>
                         <li>Время отклика
                         <li>Время отображения
@@ -132,6 +133,7 @@
                 </section>
                 <section>
                     <h2>Пропускная способность</h2>
+                    <img src="img/bottleneck.jpg" height="500px">
                 </section>
                 <section>
                     <h2>Виды тестирования производительности:</h2>
@@ -143,17 +145,16 @@
 
                 <section>
                     <h2>Нагрузочное тестирование</h2>
-                    Самый простой вид тестирования производительности<br>
-                    Цель: соответствует ли система требуемым показателям производительности
+                    Цель: проверить показатели работы приложения при ожидаемой нагрузке
                 </section>
 
 
                 <section>
                     <h2>Стресс тестирование</h2>
-                    Самый простой вид тестирования производительности<br>
-                    Цель: соответствует ли система требуемым показателям производительности
+                    Цель: проверить показатели работы приложения при диспропорциональной нагрузке нагрузке
                 </section>
                 <section>
+                    <h2>Stress in a nutshell</h2>
                     <img src="img/stress.png">
                 </section>
                 <section>
@@ -186,7 +187,8 @@
 
                 <section>
                     <h2>Настройка групп потоков</h2>
-                    <img src="img/jmeter_thread.png">
+                    <div>Test plan -> Thread group</div>
+                    <img src="img/thread.png" style="height: 360px">
                 </section>
 
                  <section>
@@ -199,18 +201,36 @@
                 </section>
 
                 <section>
+                    <h2>Запись сценария</h2>
+                    <img src="img/proxy.png" height="400px">
+                </section>
+
+                <section>
                     <h2>Настройка записи</h2>
-                    <img src="img/jmeter_script.png">
+                    <div>Workbench -> Non-tests element -> HTTP Test Script Recorder</div>
+                    <img src="img/jmeter_script.png" style="height: 80%;">
+                </section>
+
+                <section>
+                    <h2>Записанные запросы</h2>
+                    <div>Test plan -> Thread group -> Recording controller</div>
+                    <img src="img/recorded.png" style="height: 500px;">
                 </section>
 
                 <section>
                     <h2>Вывод результатов</h2>
+                    <div>Test plan -> Thread group -> Aggregate result</div>
                     <img src="img/jmeter_log.png">
                 </section>
 
 
                 <section>
                     <h2>Интерфейсное тестирование: Selenium</h2>
+                </section>
+                <section>
+                    <h2>Проблема</h2>
+                    <div>Продукт стал большим и зрелым, у ручных тестировщиков нет времени тестировать всю функциональность продукта. <br><br>
+                        Нужно автоматизировать!</div>
                 </section>
                 <section>
                     <h2>Место в пирамиде тестирования</h2>
@@ -235,41 +255,41 @@
                 <section>
                     <h2>Samples</h2>
                     <pre style="width:auto;"><code data-trim class="java">
-        // Создаем новый webdriver с указанием на банарник firefox
-        WebDriver wd = new FirefoxDriver(new FirefoxBinary(new File(
-                "E:\\ff\\firefox.exe")), new FirefoxProfile());  
+// Создаем новый webdriver с указанием на банарник firefox
+WebDriver wd = new FirefoxDriver(new FirefoxBinary(
+new File("E:\\ff\\firefox.exe")), new FirefoxProfile());  
 </code></pre>
                 </section>
 
 <section>
                     <h2>Samples</h2>
                     <pre style="width:auto;"><code data-trim class="java">
-        // Открываем гугл
-        wd.get("http://www.google.com");
+// Открываем гугл
+wd.get("http://www.google.com");
 </code></pre>
                 </section>
 
                 <section>
                     <h2>Samples</h2>
                     <pre style="width:auto;"><code data-trim class="java">
-        final String searchString = "selenium";
+final String searchString = "selenium";
 
-        // Находим поисковую строку и ищем "selenium"
-        WebElement searchBox = wd.findElement(By.name("q"));
-        searchBox.sendKeys(searchString);
-        searchBox.submit();
+// Находим поисковую строку и ищем "selenium"
+WebElement searchBox = wd.findElement(By.name("q"));
+searchBox.sendKeys(searchString);
+searchBox.submit();
 </code></pre>
                 </section>
 
                 <section>
                     <h2>Samples</h2>
                     <pre style="width:auto;"><code data-trim class="java">
-        // т.к. google асинхронный - ждем поисковой выдачи
-        (new WebDriverWait(wd, 10)).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().startsWith(searchString);
-            }
-        });
+// т.к. google асинхронный - ждем поисковой выдачи
+(new WebDriverWait(wd, 10)).until(new ExpectedCondition&lt;Boolean&gt;() {
+    public Boolean apply(WebDriver d) {
+         return d.getTitle().toLowerCase().startsWith(searchString);
+    }
+});
 </code></pre>
                 </section>
 
@@ -277,14 +297,14 @@
                 <section>
                     <h2>Samples</h2>
                     <pre style="width:auto;"><code data-trim class="java">
-                    // закрываем webdriver
-                    wd.quit();
+// закрываем webdriver
+wd.quit();
                 </code></pre>
                 </section>
 
                 <section>
                     <h2>All together</h2>
-                    <pre style="width:auto;"><code data-trim class="java">
+                    <pre style="width:auto;"><code data-trim class="java" style="font-size:80%;">
                     public class SeleniumSample {
     public static void main(String[] args) throws InterruptedException {
         // Создаем новый webdriver с указанием на банарник firefox
@@ -292,16 +312,13 @@
                 "E:\\ff\\firefox.exe")), new FirefoxProfile());
         // Открываем гугл
         wd.get("http://www.google.com");
-
         final String searchString = "selenium";
-
         // Находим поисковую строку и ищем "selenium"
         WebElement searchBox = wd.findElement(By.name("q"));
         searchBox.sendKeys(searchString);
         searchBox.submit();
-
         // т.к. google асинхронный - ждем поисковой выдачи
-        (new WebDriverWait(wd, 10)).until(new ExpectedCondition<Boolean>() {
+        (new WebDriverWait(wd, 10)).until(new ExpectedCondition&lt;Boolean&gt;() {
             public Boolean apply(WebDriver d) {
                 return d.getTitle().toLowerCase().startsWith(searchString);
             }
