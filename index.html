@@ -94,16 +94,7 @@
                 	<h2>О чем поговорим:</h2>
                     <ul>
                         <li>Нагрузочное</li>
-                        <ul>
-                            <li>Что такое и зачем
-                            <li>Подготовка к проведению
-                            <li>С помощью чего будем проводить
-                        </ul>
                         <li>Интерфейсное тестирование
-                        <ul>
-                            <li>Место в иерархии тестирования
-                            <li>Selenium
-                        </ul>
                         <li>Нагрузочное + selenium
                         <li>Практика
                     </ul>
@@ -111,27 +102,42 @@
 
                 <section>
                     <h2>Нагрузочное тестирование</h2>
-                    <img src="img/load.jpg"/>
+                    <img src="img/load.jpg" height="500px" />
                 </section>
-
+                <section>
+                    <h2>Проблема</h2>
+                    <ul>
+                        <li>Написана новая версия продукта - 4.0 (прошлая 3.8)
+                        <li>Старой пользуется много крупных клиентов(большое кол-во пользователей одновременно)
+                        <li>Новый продукт, конечно, прекрасен, но мы не знаем насколько хорошо он работает
+                    </ul>
+                </section>
                 <section>
                     <h2>Тестирование производительности</h2>
                     Проверить как быстро может работать система или её компоненты
                     Что можно проверить:
                     <ul>
                         <li>Время отклика
-                        <li>Время отображение
+                        <li>Время отображения
                         <li>Пропускную способность
                     </ul>
                 </section>
-
+                <section>
+                    <h2>Время отклика</h2>
+                    <img src="img/response.png" height="500px" width="2000px">
+                </section>
+                <section>
+                    <h2>Время отображения</h2>
+                    <img src="img/render.png" height="400px" width="100%">
+                </section>
+                <section>
+                    <h2>Пропускная способность</h2>
+                </section>
                 <section>
                     <h2>Виды тестирования производительности:</h2>
                     <ul>
                         <li>Нагрузочное(load)
                         <li>Стресс (stress)</li>
-                        <li>Конфигурационное (configuration)</li>
-                        <li>Стабильности (soak)
                     </ul>
                 </section>
 
@@ -141,6 +147,15 @@
                     Цель: соответствует ли система требуемым показателям производительности
                 </section>
 
+
+                <section>
+                    <h2>Стресс тестирование</h2>
+                    Самый простой вид тестирования производительности<br>
+                    Цель: соответствует ли система требуемым показателям производительности
+                </section>
+                <section>
+                    <img src="img/stress.png">
+                </section>
                 <section>
                     <h2>Процесс проведения</h2>
                     <ol>
@@ -151,7 +166,7 @@
                         <li>??????
                         <li>PROFIT, а может и нет
                     </ol>
-                    <p style="font-size: 20pt;">*Проводить тестирование всегда стоит на одной и той же машине</p>
+                    <p style="font-size: 20pt;">*Проводить тестирование всегда стоит на одном и том же сервере</p>
                 </section>
 
                 <section>
@@ -159,9 +174,7 @@
                     <p>Умеет тестировать:</p>
                     <ul>
                         <li>Web
-                        <li>Jms
-                        <li>Jdbc
-                        <li>soap
+                        <li>JDBC
                         <li>и другое
                     </ul>
                 </section>
@@ -207,7 +220,6 @@
                     <h2>Selenium</h2>
                     Инcтрумент для автоматизированного тестирования WEB-приложений<br>
                     <ul>
-                        <li>Selenium IDE
                         <li>Selenium WebDriver</li>
                         <li>Selenium Grid</li>
                     </ul>
@@ -221,9 +233,59 @@
                     </ul>
                 </section>
                 <section>
-                    <h2>Sample code</h2>
+                    <h2>Samples</h2>
                     <pre style="width:auto;"><code data-trim class="java">
-                        public class SeleniumSample {
+        // Создаем новый webdriver с указанием на банарник firefox
+        WebDriver wd = new FirefoxDriver(new FirefoxBinary(new File(
+                "E:\\ff\\firefox.exe")), new FirefoxProfile());  
+</code></pre>
+                </section>
+
+<section>
+                    <h2>Samples</h2>
+                    <pre style="width:auto;"><code data-trim class="java">
+        // Открываем гугл
+        wd.get("http://www.google.com");
+</code></pre>
+                </section>
+
+                <section>
+                    <h2>Samples</h2>
+                    <pre style="width:auto;"><code data-trim class="java">
+        final String searchString = "selenium";
+
+        // Находим поисковую строку и ищем "selenium"
+        WebElement searchBox = wd.findElement(By.name("q"));
+        searchBox.sendKeys(searchString);
+        searchBox.submit();
+</code></pre>
+                </section>
+
+                <section>
+                    <h2>Samples</h2>
+                    <pre style="width:auto;"><code data-trim class="java">
+        // т.к. google асинхронный - ждем поисковой выдачи
+        (new WebDriverWait(wd, 10)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.getTitle().toLowerCase().startsWith(searchString);
+            }
+        });
+</code></pre>
+                </section>
+
+
+                <section>
+                    <h2>Samples</h2>
+                    <pre style="width:auto;"><code data-trim class="java">
+                    // закрываем webdriver
+                    wd.quit();
+                </code></pre>
+                </section>
+
+                <section>
+                    <h2>All together</h2>
+                    <pre style="width:auto;"><code data-trim class="java">
+                    public class SeleniumSample {
     public static void main(String[] args) throws InterruptedException {
         // Создаем новый webdriver с указанием на банарник firefox
         WebDriver wd = new FirefoxDriver(new FirefoxBinary(new File(
@@ -250,6 +312,7 @@
 }
 </code></pre>
                 </section>
+
                 <section>
                     <h2>Jmeter+Selenium. Success story</h2>
                     <h3><a href="https://github.com/d0k1/jsflight">Jsflight</a></h3>
