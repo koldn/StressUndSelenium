@@ -257,7 +257,7 @@
                     <pre style="width:auto;"><code data-trim class="java">
 // Создаем новый webdriver с указанием на банарник firefox
 WebDriver wd = new FirefoxDriver(new FirefoxBinary(
-new File("E:\\ff\\firefox.exe")), new FirefoxProfile());  
+new File("D:\\ff\\firefox.exe")), new FirefoxProfile());  
 </code></pre>
                 </section>
 
@@ -309,7 +309,7 @@ wd.quit();
     public static void main(String[] args) throws InterruptedException {
         // Создаем новый webdriver с указанием на банарник firefox
         WebDriver wd = new FirefoxDriver(new FirefoxBinary(new File(
-                "E:\\ff\\firefox.exe")), new FirefoxProfile());
+                "D:\\ff\\firefox.exe")), new FirefoxProfile());
         // Открываем гугл
         wd.get("http://www.google.com");
         final String searchString = "selenium";
